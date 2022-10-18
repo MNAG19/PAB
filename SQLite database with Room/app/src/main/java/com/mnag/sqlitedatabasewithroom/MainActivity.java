@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onLoaderReset(@NonNull Loader<Boolean> loader) {
 
                     }
-                });
+                }).forceLoad();
     }
 
     private void userAdded() {
