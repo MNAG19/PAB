@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "dbkamus";
     private static final int DATABASE_VERSION = 1;
 
-    public static  String CREATE_TABLE_ENGLISH_INDONESIA = "CREATE TABLE "  + TABLE_ENGLISH_INDONESIA + " (" + _ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
+    public static  String CREATE_TABLE_ENGLISH_INDONESIA = "CREATE TABLE "  + TABLE_ENGLISH_INDONESIA + " (" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             ENGLISH_INDONESIA_TITLE + " TEXT NOT NULL, " + ENGLISH_INDONESIA_DESCRIPTION + " TEXT NOT NULL);";
 
     public DatabaseHelper(Context context) {
