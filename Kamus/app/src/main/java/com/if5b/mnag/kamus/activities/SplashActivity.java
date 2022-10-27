@@ -1,6 +1,7 @@
 package com.if5b.mnag.kamus.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.AsyncTaskLoader;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -25,7 +26,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -50,9 +50,7 @@ public class SplashActivity extends AppCompatActivity {
             Boolean firstRun = appPreference.getFirstRun();
             if(firstRun){
                 ArrayList<Kamus> kamusEnglishIndonesia = preLoadRawEnglishIndonesia();
-
                 kamusHelper.open();
-
                 progress = 30;
                 publishProgress((int) progress);
                 Double progressMaxInsert = 80.0;
@@ -64,7 +62,6 @@ public class SplashActivity extends AppCompatActivity {
 //                    publishProgress((int) progress);
 //                }
                 kamusHelper.beginTransaction();
-
                 try {
                     for (Kamus kamus : kamusEnglishIndonesia){
                         kamusHelper.insertTransactionDataEnglishIndonesia(kamus);
@@ -75,13 +72,13 @@ public class SplashActivity extends AppCompatActivity {
                 }catch (Exception e){
                     Log.e(TAG, e.getMessage());
                 }
-
                 kamusHelper.endTransaction();
 
                 kamusHelper.close();
                 appPreference.setFirstRun(false);
                 publishProgress((int) maxProgress);
-            }else{
+            }
+            else{
                 try {
                     synchronized (this){
                         this.wait(1000);

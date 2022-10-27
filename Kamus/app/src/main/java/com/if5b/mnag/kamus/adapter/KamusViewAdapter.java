@@ -1,7 +1,6 @@
 package com.if5b.mnag.kamus.adapter;
 
 import android.content.Context;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
