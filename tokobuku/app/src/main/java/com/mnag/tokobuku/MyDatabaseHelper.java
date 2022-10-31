@@ -43,31 +43,31 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long addBook(String isbn, String title, String category, String description, double price) {
+    public long addBook(Book book) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(FIELD_ISBN, isbn);
-        cv.put(FIELD_TITLE, title);
-        cv.put(FIELD_CATEGORY, category);
-        cv.put(FIELD_DESCRIPTION, description);
-        cv.put(FIELD_PRICE, price);
+        cv.put(FIELD_ISBN, book.getIsbn());
+        cv.put(FIELD_TITLE, book.getJudul());
+        cv.put(FIELD_CATEGORY, book.getKategori());
+        cv.put(FIELD_DESCRIPTION, book.getDeskripsi());
+        cv.put(FIELD_PRICE, book.getHarga());
 
         long result = db.insert(TABLE_NAME, null, cv);
         return result;
     }
 
-    public long editBookById(String id, String isbn, String title, String category, String description, double price) {
+    public long editBookById(Book book) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(FIELD_ISBN, isbn);
-        cv.put(FIELD_TITLE, title);
-        cv.put(FIELD_CATEGORY, category);
-        cv.put(FIELD_DESCRIPTION, description);
-        cv.put(FIELD_PRICE, price);
+        cv.put(FIELD_ISBN, book.getIsbn());
+        cv.put(FIELD_TITLE, book.getJudul());
+        cv.put(FIELD_CATEGORY, book.getKategori());
+        cv.put(FIELD_DESCRIPTION, book.getDeskripsi());
+        cv.put(FIELD_PRICE, book.getHarga());
 
-        long result = db.update(TABLE_NAME, cv, "id = ?", new String[]{id});
+        long result = db.update(TABLE_NAME, cv, "id = ?", new String[]{book.getId()});
         return result;
     }
 
@@ -83,9 +83,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public long deleteBookById(String id) {
+    public long deleteBookById(Book book) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLE_NAME,"id = ?", new String[]{id});
+        long result = db.delete(TABLE_NAME,"id = ?", new String[]{book.getId()});
         return result;
     }
 
