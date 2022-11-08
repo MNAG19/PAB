@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static  String CREATE_TABLE_ENGLISH_INDONESIA = "CREATE TABLE "  + TABLE_ENGLISH_INDONESIA + " (" + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             ENGLISH_INDONESIA_TITLE + " TEXT NOT NULL, " + ENGLISH_INDONESIA_DESCRIPTION + " TEXT NOT NULL);";
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ENGLISH_INDONESIA);
         onCreate(db);
     }

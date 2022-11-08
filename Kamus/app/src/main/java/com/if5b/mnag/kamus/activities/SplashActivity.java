@@ -127,8 +127,10 @@ public class SplashActivity extends AppCompatActivity {
                 kamus = new Kamus(splitstr[0], splitstr[1]);
                 kamusArrayList.add(kamus);
                 count++;
-            }while (line != null);
-        }catch (Exception e){
+            }
+            while (line != null);
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
         return kamusArrayList;
