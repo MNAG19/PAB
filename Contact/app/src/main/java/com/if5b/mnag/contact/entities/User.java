@@ -9,4 +9,13 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
+
+    @ColumnInfo(name = "name")
+    private String name;
+
+    @ColumnInfo(name = "email")
+    private String email;
+
+    @ColumnInfo(name = "phone")
+    private String phone;
 }
