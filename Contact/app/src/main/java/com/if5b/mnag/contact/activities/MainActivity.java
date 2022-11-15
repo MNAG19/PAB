@@ -45,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.fabInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, InputActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -124,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLoaderReset(@NonNull Loader<Integer> loader) {
 
             }
-        });
+        }).forceLoad();
     }
 
     private void itemDelete() {
