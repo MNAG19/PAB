@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         postViewAdapter = new PostViewAdapter();
         binding.rvPost.setLayoutManager(new LinearLayoutManager(this));
         binding.rvPost.setAdapter(postViewAdapter);
+
+        binding.fabRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getAllPost();
+            }
+        });
     }
 
     @Override
