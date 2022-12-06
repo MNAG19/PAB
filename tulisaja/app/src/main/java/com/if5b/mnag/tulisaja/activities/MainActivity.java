@@ -1,12 +1,17 @@
 package com.if5b.mnag.tulisaja.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.if5b.mnag.tulisaja.R;
 import com.if5b.mnag.tulisaja.adapters.PostViewAdapter;
 import com.if5b.mnag.tulisaja.databinding.ActivityMainBinding;
 import com.if5b.mnag.tulisaja.models.Post;
@@ -33,16 +38,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if(!Utilities.checkValue(MainActivity.this, "xUsername")){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         postViewAdapter = new PostViewAdapter();
         binding.rvPost.setLayoutManager(new LinearLayoutManager(this));
         binding.rvPost.setAdapter(postViewAdapter);
-
-        binding.fabRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getAllPost();
-            }
-        });
     }
 
     @Override
@@ -76,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(MainActivity.this, "Response code: " + response.code(), Toast.LENGTH_SHORT).show();
-
                 }
                 hideProgressBar();
             }
@@ -87,5 +90,29 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Retrofit error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == R.id.action_logout){
+            Utilities.clearUser(this);
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        if(id == R.id.action_refresh){
+            getAllPost();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

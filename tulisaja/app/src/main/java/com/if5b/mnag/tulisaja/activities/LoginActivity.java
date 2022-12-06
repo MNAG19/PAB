@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     String message = response.body().getMessage();
                     if(success == 1){
                         Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Utilities.setValue(LoginActivity.this, "xUsername", username);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
