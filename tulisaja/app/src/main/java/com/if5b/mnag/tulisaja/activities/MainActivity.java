@@ -1,5 +1,9 @@
 package com.if5b.mnag.tulisaja.activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,8 +32,18 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    public static final String KEY_USERNAME = "xUsername";
+    public static final String KEY_API = "dirumahaja";
     private PostViewAdapter postViewAdapter;
     private List<Post> data = new ArrayList<>();
+    private ActivityResultLauncher<Intent> intentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result.getResultCode() == RESULT_OK) {
+                getAllPost();
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
