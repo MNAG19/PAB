@@ -42,8 +42,7 @@ public class InsertActivity extends AppCompatActivity {
                     String content = binding.etContent.getText().toString();
                     if (isEdit) {
                         editPost(postId, content);
-                    }
-                    else {
+                    } else {
                         addPost(username, content);
                     }
                 }
@@ -57,7 +56,7 @@ public class InsertActivity extends AppCompatActivity {
     }
 
     private boolean validateFields() {
-        if(TextUtils.isEmpty(binding.etContent.getText().toString())) {
+        if (TextUtils.isEmpty(binding.etContent.getText().toString())) {
             Toast.makeText(this, "Content tidak boleh kosong yaaaaa", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -68,17 +67,15 @@ public class InsertActivity extends AppCompatActivity {
         ApiService.endpoint().updatePost(MainActivity.KEY_API, postId, content).enqueue(new Callback<ValueNoData>() {
             @Override
             public void onResponse(Call<ValueNoData> call, Response<ValueNoData> response) {
-                if(response.code() == 200) {
-                    if(response.body().getSuccess() == 1) {
+                if (response.code() == 200) {
+                    if (response.body().getSuccess() == 1) {
                         Toast.makeText(InsertActivity.this, "Berhasil edit data", Toast.LENGTH_SHORT).show();
                         setResult(RESULT_OK);
                         finish();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(InsertActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(InsertActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -94,16 +91,14 @@ public class InsertActivity extends AppCompatActivity {
         ApiService.endpoint().insertPost(MainActivity.KEY_API, username, content).enqueue(new Callback<ValueNoData>() {
             @Override
             public void onResponse(Call<ValueNoData> call, Response<ValueNoData> response) {
-                if(response.code() == 200) {
-                    if(response.body().getSuccess() == 1) {
+                if (response.code() == 200) {
+                    if (response.body().getSuccess() == 1) {
                         Toast.makeText(InsertActivity.this, "Berhasil masukan data", Toast.LENGTH_SHORT).show();
                         finish();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(InsertActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(InsertActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
