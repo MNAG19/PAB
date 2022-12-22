@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Mooneyq</string>
+    <string name="select">Select Item</string>
+    <string-array name="jenis_Transaksi_array">
+        <item>Pengeluaran</item>
+        <item>Pemasukan</item>
+    </string-array>
 </resources>
